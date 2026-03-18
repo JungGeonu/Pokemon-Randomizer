@@ -201,7 +201,7 @@ function playPokeballSound() {
         osc.frequency.setValueAtTime(800, audioCtx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
         
-        gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime); // Reduced further to 0.03
         gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
         
         osc.start(audioCtx.currentTime);
@@ -252,6 +252,65 @@ function playPokeballOpenSound() {
         }, 1200); // 1.2초 후 페이드 시작해서 서서히 닫음
     } catch (e) {
         console.error(e);
+    }
+}
+
+function createPokeballParticles() {
+    const btn = document.getElementById('btn-draw');
+    if (!btn) return;
+    
+    // Get absolute screen center coordinate of Pokeball
+    const rect = btn.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const count = 75; // Even more dense
+    const colors = ['#ff4d4d', '#ffffff', '#ffeb3b', '#00e5ff', '#a6ff00', '#ff007f', '#e0b0ff']; 
+    
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'pokeball-particle';
+        
+        // Random Angle & Velocity
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 150 + Math.random() * 280; 
+        const x = Math.cos(angle) * speed;
+        const y = Math.sin(angle) * speed;
+        
+        p.style.setProperty('--x', `${x}px`);
+        p.style.setProperty('--y', `${y}px`);
+        
+        // Background Color
+        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Random Size
+        const size = 10 + Math.random() * 15; 
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.boxShadow = `0 0 15px ${p.style.backgroundColor}, 0 0 8px white`;
+        
+        // Base transform to ensure absolute center anchoring
+        p.style.transform = 'translate(-50%, -50%)';
+        
+        // Star particle via scale classes
+        const shapeType = Math.random();
+        if (shapeType > 0.6) {
+            p.classList.add('star-particle'); // 4-Point Star
+        } else if (shapeType > 0.3) {
+            p.style.borderRadius = '4px'; // Square
+            p.style.transform += ' rotate(45deg)';
+        } else {
+            p.style.borderRadius = '50%';
+        }
+        
+        // Position absolutely on the body to avoid masked layering
+        p.style.position = 'fixed';
+        p.style.left = `${centerX}px`;
+        p.style.top = `${centerY}px`;
+        p.style.zIndex = '9999';
+        
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1000);
     }
 }
 
@@ -368,7 +427,7 @@ function setupEventListeners() {
                     }
                     if (pokemon.cry) {
                         const cryAudio = new Audio(pokemon.cry);
-                        cryAudio.volume = 0.3;
+                        cryAudio.volume = 0.05; // Reduced volume
                         cryAudio.play().catch(() => {});
                     }
                 }
@@ -491,6 +550,7 @@ async function startDraw() {
     setTimeout(() => {
         btnDraw.classList.remove('shake-animation');
         btnDraw.classList.add('open-animation');
+        createPokeballParticles(); // trigger particles
         playPokeballOpenSound();
     }, 600);
 
@@ -703,12 +763,14 @@ function createCardElement(pokemon) {
     const wikiUrl = wikiLang === 'en' ? `https://pokemon.fandom.com/wiki/${wikiName}` : `https://pokemon.fandom.com/${wikiLang}/wiki/${wikiName}`;
 
     container.innerHTML = `
-        <div class="pokemon-card">
+        <div class="pokemon-card ${pokemon.isShiny ? 'shiny-card' : ''} ${pokemon.isLegendary || pokemon.isMythical ? 'rare-card' : ''}">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="pokeball-bg"></div>
+                    <div class="reveal-flash"></div> <!-- Card flash -->
                 </div>
                 <div class="card-back" style="${bgStyle}">
+                    <div class="card-shine-effect"></div> <!-- Shine beam -->
                     <button class="btn-reroll" onclick="redrawSingleCard(this)" title="이 포켓몬만 다시 뽑기">🔄</button>
                     <div class="card-header">
                         <span class="poke-id">${formattedId}</span>
@@ -922,7 +984,7 @@ async function redrawSingleCard(btn) {
                         }
                         if (foundPokemon.cry) {
                             const cryAudio = new Audio(foundPokemon.cry);
-                            cryAudio.volume = 0.3;
+                            cryAudio.volume = 0.05; // Reduced volume
                             cryAudio.play().catch(() => {});
                         }
                     }
