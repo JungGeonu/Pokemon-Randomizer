@@ -102,6 +102,26 @@ const POKEBALL_TYPES = [
     'dream-ball', 'beast-ball'
 ];
 
+// DOM Elements
+const genFiltersContainer = document.getElementById('gen-filters');
+const typeFiltersContainer = document.getElementById('type-filters');
+const btnSelectAll = document.getElementById('btn-select-all');
+const btnDeselectAll = document.getElementById('btn-deselect-all');
+const btnDraw = document.getElementById('btn-draw');
+const btnDrawAgain = document.getElementById('btn-draw-again');
+const drawCountInput = document.getElementById('draw-count');
+const shinyProbInput = document.getElementById('shiny-prob');
+
+const idleState = document.getElementById('idle-state');
+const loadingState = document.getElementById('loading-state');
+const resultState = document.getElementById('result-state');
+const cardsGrid = document.getElementById('cards-grid');
+const toastEl = document.getElementById('toast');
+
+// 오디오 자동 재생 차단(어뷰징 방지)을 피하기 위한 전역 Audio 객체
+const shinyAudio = new Audio('https://raw.githubusercontent.com/jordles/Kalos-Pokedex/main/shiny.mp3');
+shinyAudio.volume = 0.5;
+
 // Initialize App
 function init() {
     renderFilters();
