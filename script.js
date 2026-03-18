@@ -58,7 +58,7 @@ const cardsGrid = document.getElementById('cards-grid');
 const toastEl = document.getElementById('toast');
 
 // 오디오 자동 재생 차단(어뷰징 방지)을 피하기 위한 전역 Audio 객체
-const shinyAudio = new Audio('https://play.pokemonshowdown.com/audio/shiny.mp3');
+const shinyAudio = new Audio('https://raw.githubusercontent.com/jordles/Kalos-Pokedex/main/shiny.mp3');
 shinyAudio.volume = 0.5;
 
 const STAT_NAMES_KO = {
