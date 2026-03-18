@@ -357,6 +357,11 @@ function renderCards(pokemons) {
             const cardInner = cardEl.querySelector('.pokemon-card');
             if (cardInner) {
                 cardInner.classList.add('flipped');
+                if (pokemon.isShiny) {
+                    const audio = new Audio('https://play.pokemonshowdown.com/audio/shiny.mp3');
+                    audio.volume = 0.5;
+                    audio.play().catch(e => console.error("Audio play failed:", e));
+                }
             }
         }, 500 + (index * 200));
         
@@ -620,7 +625,14 @@ async function redrawSingleCard(btn) {
                 const refreshedContainer = document.querySelector(`.pokemon-card-container[data-poke-id="${foundPokemon.id}"]`);
                 if (refreshedContainer) {
                     const newInner = refreshedContainer.querySelector('.pokemon-card');
-                    if (newInner) newInner.classList.add('flipped');
+                    if (newInner) {
+                        newInner.classList.add('flipped');
+                        if (foundPokemon.isShiny) {
+                            const audio = new Audio('https://play.pokemonshowdown.com/audio/shiny.mp3');
+                            audio.volume = 0.5;
+                            audio.play().catch(e => console.error("Audio play failed:", e));
+                        }
+                    }
                     
                     setTimeout(() => {
                         const innerBars = refreshedContainer.querySelectorAll('.stat-bar-inner');
