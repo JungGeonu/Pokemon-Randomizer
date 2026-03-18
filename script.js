@@ -206,6 +206,27 @@ function playPokeballSound() {
     } catch (e) { console.error(e); }
 }
 
+const pokeballOpenAudio = new Audio('https://www.myinstants.com/media/sounds/sound-effects-pokemon-anime-7-pokemon-out.mp3');
+pokeballOpenAudio.volume = 0.2;
+
+function playPokeballOpenSound() {
+    try {
+        pokeballOpenAudio.volume = 0.2;
+        pokeballOpenAudio.currentTime = 0;
+        pokeballOpenAudio.play().catch(e => console.error("Pokeball open audio play failed:", e));
+        setTimeout(() => {
+            const fadeInterval = setInterval(() => {
+                if (pokeballOpenAudio.volume > 0.01) {
+                    pokeballOpenAudio.volume = Math.max(0, pokeballOpenAudio.volume - 0.008);
+                } else {
+                    clearInterval(fadeInterval);
+                    pokeballOpenAudio.pause();
+                }
+            }, 12);
+        }, 1200);
+    } catch (e) { console.error(e); }
+}
+
 function createPokeballParticles() {
     const btn = document.getElementById('btn-draw');
     if (!btn) return;
@@ -491,7 +512,8 @@ async function startDraw() {
     setTimeout(() => {
         btnDraw.classList.remove('shake-animation');
         btnDraw.classList.add('open-animation');
-        createPokeballParticles(); // trigger particles
+        createPokeballParticles();
+        playPokeballOpenSound();
     }, 600);
 
     setTimeout(async () => {
