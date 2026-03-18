@@ -358,6 +358,17 @@ body {
     100% { transform: translate(0, 0) rotate(0); }
 }
 
+@keyframes pokeballBurst {
+    0% { transform: scale(1); filter: brightness(1) drop-shadow(0 15px 35px rgba(0,0,0,0.4)); opacity: 1; }
+    40% { transform: scale(1.4); filter: brightness(5) drop-shadow(0 0 40px #fff); opacity: 1; }
+    100% { transform: scale(5); filter: brightness(10) drop-shadow(0 0 100px #fff); opacity: 0; }
+}
+
+.open-animation {
+    animation: pokeballBurst 0.5s ease-out forwards !important;
+    pointer-events: none;
+}
+
 /* Loading State */
 .loading-state {
     display: flex;

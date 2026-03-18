@@ -440,11 +440,16 @@ async function startDraw() {
         return;
     }
 
-    playPokeballOpenSound();
     btnDraw.classList.add('shake-animation');
     
-    setTimeout(async () => {
+    setTimeout(() => {
         btnDraw.classList.remove('shake-animation');
+        btnDraw.classList.add('open-animation');
+        playPokeballOpenSound();
+    }, 600);
+
+    setTimeout(async () => {
+        btnDraw.classList.remove('open-animation');
         showState('loading');
         cardsGrid.innerHTML = '';
         
@@ -541,7 +546,7 @@ async function startDraw() {
             showState('idle');
         }
 
-    }, 800); 
+    }, 1100); 
 }
 
 function renderCards(pokemons) {
