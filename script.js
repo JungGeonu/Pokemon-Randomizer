@@ -8,37 +8,37 @@ const MYTHICAL_IDS = [151, 251, 385, 386, 489, 490, 491, 492, 493, 494, 647, 648
 
 // Generation Data
 const GENERATIONS = [
-    { id: 1, names: { ko: '1세대', en: 'Gen 1', ja: '第1世代' }, start: 1, end: 151 },
-    { id: 2, names: { ko: '2세대', en: 'Gen 2', ja: '第2世代' }, start: 152, end: 251 },
-    { id: 3, names: { ko: '3세대', en: 'Gen 3', ja: '第3世代' }, start: 252, end: 386 },
-    { id: 4, names: { ko: '4세대', en: 'Gen 4', ja: '第4世代' }, start: 387, end: 493 },
-    { id: 5, names: { ko: '5세대', en: 'Gen 5', ja: '第5世代' }, start: 494, end: 649 },
-    { id: 6, names: { ko: '6세대', en: 'Gen 6', ja: '第6世代' }, start: 650, end: 721 },
-    { id: 7, names: { ko: '7세대', en: 'Gen 7', ja: '第7世代' }, start: 722, end: 809 },
-    { id: 8, names: { ko: '8세대', en: 'Gen 8', ja: '第8世代' }, start: 810, end: 905 },
-    { id: 9, names: { ko: '9세대', en: 'Gen 9', ja: '第9世代' }, start: 906, end: 1025 }
+    { id: 1, names: { ko: '1세대', en: 'Gen 1', ja: '第1世代', 'zh-Hans': '第1世代', fr: 'Générations 1', it: 'Generazioni 1', es: 'Gen 1', de: 'Generation 1' }, start: 1, end: 151 },
+    { id: 2, names: { ko: '2세대', en: 'Gen 2', ja: '第2世代', 'zh-Hans': '第2世代', fr: 'Générations 2', it: 'Generazioni 2', es: 'Gen 2', de: 'Generation 2' }, start: 152, end: 251 },
+    { id: 3, names: { ko: '3세대', en: 'Gen 3', ja: '第3世代', 'zh-Hans': '第3世代', fr: 'Générations 3', it: 'Generazioni 3', es: 'Gen 3', de: 'Generation 3' }, start: 252, end: 386 },
+    { id: 4, names: { ko: '4세대', en: 'Gen 4', ja: '第4世代', 'zh-Hans': '第4世代', fr: 'Générations 4', it: 'Generazioni 4', es: 'Gen 4', de: 'Generation 4' }, start: 387, end: 493 },
+    { id: 5, names: { ko: '5세대', en: 'Gen 5', ja: '第5世代', 'zh-Hans': '第5世代', fr: 'Générations 5', it: 'Generazioni 5', es: 'Gen 5', de: 'Generation 5' }, start: 494, end: 649 },
+    { id: 6, names: { ko: '6세대', en: 'Gen 6', ja: '第6世代', 'zh-Hans': '第6世代', fr: 'Générations 6', it: 'Generazioni 6', es: 'Gen 6', de: 'Generation 6' }, start: 650, end: 721 },
+    { id: 7, names: { ko: '7세대', en: 'Gen 7', ja: '第7世代', 'zh-Hans': '第7世代', fr: 'Générations 7', it: 'Generazioni 7', es: 'Gen 7', de: 'Generation 7' }, start: 722, end: 809 },
+    { id: 8, names: { ko: '8세대', en: 'Gen 8', ja: '第8世代', 'zh-Hans': '第8世代', fr: 'Générations 8', it: 'Generazioni 8', es: 'Gen 8', de: 'Generation 8' }, start: 810, end: 905 },
+    { id: 9, names: { ko: '9세대', en: 'Gen 9', ja: '第9世代', 'zh-Hans': '第9世代', fr: 'Générations 9', it: 'Generazioni 9', es: 'Gen 9', de: 'Generation 9' }, start: 906, end: 1025 }
 ];
 
 // Type Data
 const TYPES = [
-    { id: 'normal', names: { ko: '노말', en: 'Normal', ja: 'ノーマル' }, color: 'var(--type-normal)' },
-    { id: 'fire', names: { ko: '불꽃', en: 'Fire', ja: 'ほのお' }, color: 'var(--type-fire)' },
-    { id: 'water', names: { ko: '물', en: 'Water', ja: 'みず' }, color: 'var(--type-water)' },
-    { id: 'electric', names: { ko: '전기', en: 'Electric', ja: 'でんき' }, color: 'var(--type-electric)' },
-    { id: 'grass', names: { ko: '풀', en: 'Grass', ja: 'くさ' }, color: 'var(--type-grass)' },
-    { id: 'ice', names: { ko: '얼음', en: 'Ice', ja: 'こおり' }, color: 'var(--type-ice)' },
-    { id: 'fighting', names: { ko: '격투', en: 'Fighting', ja: 'かくとう' }, color: 'var(--type-fighting)' },
-    { id: 'poison', names: { ko: '독', en: 'Poison', ja: 'どく' }, color: 'var(--type-poison)' },
-    { id: 'ground', names: { ko: '땅', en: 'Ground', ja: 'じめん' }, color: 'var(--type-ground)' },
-    { id: 'flying', names: { ko: '비행', en: 'Flying', ja: 'ひこう' }, color: 'var(--type-flying)' },
-    { id: 'psychic', names: { ko: '에스퍼', en: 'Psychic', ja: 'エスパー' }, color: 'var(--type-psychic)' },
-    { id: 'bug', names: { ko: '벌레', en: 'Bug', ja: 'むし' }, color: 'var(--type-bug)' },
-    { id: 'rock', names: { ko: '바위', en: 'Rock', ja: 'いわ' }, color: 'var(--type-rock)' },
-    { id: 'ghost', names: { ko: '고스트', en: 'Ghost', ja: 'ゴースト' }, color: 'var(--type-ghost)' },
-    { id: 'dragon', names: { ko: '드래곤', en: 'Dragon', ja: 'ドラゴン' }, color: 'var(--type-dragon)' },
-    { id: 'dark', names: { ko: '악', en: 'Dark', ja: 'あく' }, color: 'var(--type-dark)' },
-    { id: 'steel', names: { ko: '강철', en: 'Steel', ja: 'はがね' }, color: 'var(--type-steel)' },
-    { id: 'fairy', names: { ko: '페어리', en: 'Fairy', ja: 'フェアリー' }, color: 'var(--type-fairy)' }
+    { id: 'normal', names: { ko: '노말', en: 'Normal', ja: 'ノーマル', 'zh-Hans': '一般', fr: 'Normal', it: 'Normale', es: 'Normal', de: 'Normal' }, color: 'var(--type-normal)' },
+    { id: 'fire', names: { ko: '불꽃', en: 'Fire', ja: 'ほのお', 'zh-Hans': '火', fr: 'Feu', it: 'Fuoco', es: 'Fuego', de: 'Feuer' }, color: 'var(--type-fire)' },
+    { id: 'water', names: { ko: '물', en: 'Water', ja: 'みず', 'zh-Hans': '水', fr: 'Eau', it: 'Acqua', es: 'Agua', de: 'Wasser' }, color: 'var(--type-water)' },
+    { id: 'electric', names: { ko: '전기', en: 'Electric', ja: 'でんき', 'zh-Hans': '电', fr: 'Électrik', it: 'Elettro', es: 'Eléctrico', de: 'Elektro' }, color: 'var(--type-electric)' },
+    { id: 'grass', names: { ko: '풀', en: 'Grass', ja: 'くさ', 'zh-Hans': '草', fr: 'Plante', it: 'Erba', es: 'Planta', de: 'Pflanze' }, color: 'var(--type-grass)' },
+    { id: 'ice', names: { ko: '얼음', en: 'Ice', ja: 'こおり', 'zh-Hans': '冰', fr: 'Glace', it: 'Ghiaccio', es: 'Hielo', de: 'Eis' }, color: 'var(--type-ice)' },
+    { id: 'fighting', names: { ko: '격투', en: 'Fighting', ja: 'かくとう', 'zh-Hans': '格斗', fr: 'Combat', it: 'Lotta', es: 'Lucha', de: 'Kampf' }, color: 'var(--type-fighting)' },
+    { id: 'poison', names: { ko: '독', en: 'Poison', ja: 'どく', 'zh-Hans': '毒', fr: 'Poison', it: 'Veleno', es: 'Veneno', de: 'Gift' }, color: 'var(--type-poison)' },
+    { id: 'ground', names: { ko: '땅', en: 'Ground', ja: 'じめん', 'zh-Hans': '地面', fr: 'Sol', it: 'Terra', es: 'Tierra', de: 'Boden' }, color: 'var(--type-ground)' },
+    { id: 'flying', names: { ko: '비행', en: 'Flying', ja: 'ひこう', 'zh-Hans': '飞行', fr: 'Vol', it: 'Volante', es: 'Volador', de: 'Flug' }, color: 'var(--type-flying)' },
+    { id: 'psychic', names: { ko: '에스퍼', en: 'Psychic', ja: 'エスパー', 'zh-Hans': '超能力', fr: 'Psy', it: 'Psico', es: 'Psíquico', de: 'Psycho' }, color: 'var(--type-psychic)' },
+    { id: 'bug', names: { ko: '벌레', en: 'Bug', ja: 'むし', 'zh-Hans': '虫', fr: 'Insecte', it: 'Coleottero', es: 'Bicho', de: 'Käfer' }, color: 'var(--type-bug)' },
+    { id: 'rock', names: { ko: '바위', en: 'Rock', ja: 'いわ', 'zh-Hans': '岩石', fr: 'Roche', it: 'Roccia', es: 'Roca', de: 'Gestein' }, color: 'var(--type-rock)' },
+    { id: 'ghost', names: { ko: '고스트', en: 'Ghost', ja: 'ゴースト', 'zh-Hans': '幽灵', fr: 'Spectre', it: 'Spettro', es: 'Fantasma', de: 'Geist' }, color: 'var(--type-ghost)' },
+    { id: 'dragon', names: { ko: '드래곤', en: 'Dragon', ja: 'ドラゴン', 'zh-Hans': '龙', fr: 'Dragon', it: 'Drago', es: 'Dragón', de: 'Drache' }, color: 'var(--type-dragon)' },
+    { id: 'dark', names: { ko: '악', en: 'Dark', ja: 'あく', 'zh-Hans': '恶', fr: 'Ténèbres', it: 'Buio', es: 'Siniestro', de: 'Unlicht' }, color: 'var(--type-dark)' },
+    { id: 'steel', names: { ko: '강철', en: 'Steel', ja: 'はがね', 'zh-Hans': '钢', fr: 'Acier', it: 'Acciaio', es: 'Acero', de: 'Stahl' }, color: 'var(--type-steel)' },
+    { id: 'fairy', names: { ko: '페어리', en: 'Fairy', ja: 'フェアリー', 'zh-Hans': '妖精', fr: 'Fée', it: 'Folletto', es: 'Hada', de: 'Fee' }, color: 'var(--type-fairy)' }
 ];
 
 const I18N = {
@@ -50,7 +50,8 @@ const I18N = {
         main_title: '랜덤 뽑기', draw_instruction: '몬스터볼을 클릭해 포켓몬을 뽑아보세요!', loading_text: '조건에 맞는 포켓몬을 찾는 중...',
         btn_draw_again: '다시 뽑기', stat_height: '키', stat_weight: '몸무게', base_stats_title: '종족값', matchups_title: '방어 상성',
         matchup_4x: '치명적', matchup_2x: '약점', matchup_05x: '반감', matchup_025x: '극반감', matchup_0x: '효과없음',
-        badge_shiny: '✨ 이로치', badge_mythical: '환상', badge_legendary: '전설', error_no_pokemon: '조건에 맞는 포켓몬이 없습니다.'
+        badge_shiny: '✨ 이로치', badge_mythical: '환상', badge_legendary: '전설', error_no_pokemon: '조건에 맞는 포켓몬이 없습니다.',
+        prob_never: '등장 안함 (0%)', prob_always: '무조건 등장 (100%)'
     },
     'en': {
         filter_title: 'Filter Settings', filter_desc: 'Select desired conditions', btn_select_all: 'Select All', btn_deselect_all: 'Deselect All',
@@ -60,7 +61,8 @@ const I18N = {
         main_title: 'Randomizer', draw_instruction: 'Click the Pokeball to Draw!', loading_text: 'Searching for Pokemon...',
         btn_draw_again: 'Draw Again', stat_height: 'Height', stat_weight: 'Weight', base_stats_title: 'Base Stats', matchups_title: 'Type Matchups',
         matchup_4x: 'Very Weak', matchup_2x: 'Weak', matchup_05x: 'Resist', matchup_025x: 'Strong Resist', matchup_0x: 'Immune',
-        badge_shiny: '✨ Shiny', badge_mythical: 'Mythical', badge_legendary: 'Legendary', error_no_pokemon: 'No Pokemon found for these conditions.'
+        badge_shiny: '✨ Shiny', badge_mythical: 'Mythical', badge_legendary: 'Legendary', error_no_pokemon: 'No Pokemon found for these conditions.',
+        prob_never: 'Never (0%)', prob_always: 'Always (100%)'
     },
     'ja': {
         filter_title: 'フィルター設定', filter_desc: '条件を選択してください', btn_select_all: 'すべて選択', btn_deselect_all: 'すべて解除',
@@ -70,19 +72,75 @@ const I18N = {
         main_title: 'ランダムガチャ', draw_instruction: 'モンスターボールをクリック！', loading_text: 'ポケモンを探しています...',
         btn_draw_again: 'もう一度引く', stat_height: '高さ', stat_weight: '重さ', base_stats_title: '種族値', matchups_title: 'タイプ相性',
         matchup_4x: '効果ばつぐん', matchup_2x: '効果ばつぐん', matchup_05x: '効果はいまひとつ', matchup_025x: '効果はいまひとつ', matchup_0x: '効果なし',
-        badge_shiny: '✨ 色違い', badge_mythical: '幻', badge_legendary: '伝説', error_no_pokemon: '条件に合うポケモンがいません。'
+        badge_shiny: '✨ 色違い', badge_mythical: '幻', badge_legendary: '伝説', error_no_pokemon: '条件に合うポケモンがいません。',
+        prob_never: '出現しない (0%)', prob_always: '必ず出現 (100%)'
+    },
+    'zh-Hans': {
+        filter_title: '筛选设置', filter_desc: '请选择所需条件', btn_select_all: '全选', btn_deselect_all: '全不选',
+        gen_title: '世代 (Generation)', type_title: '属性 (Type)', special_title: '特殊 (Special)',
+        filter_legendary: '包含传说', filter_mythical: '包含幻之', filter_normal: '包含普通', option_title: '选项设置',
+        lang_title: '语言 (Language)', draw_count_title: '抽取数量', draw_count_unit: '只', shiny_prob_title: '闪光概率',
+        main_title: '随机抽取', draw_instruction: '点击精灵球抽取宝可梦！', loading_text: '正在寻找符合条件的宝可梦...',
+        btn_draw_again: '再次抽取', stat_height: '身高', stat_weight: '体重', base_stats_title: '种族值', matchups_title: '属性相克',
+        matchup_4x: '效果绝佳 (4x)', matchup_2x: '效果绝佳 (2x)', matchup_05x: '效果不好 (0.5x)', matchup_025x: '效果不好 (0.25x)', matchup_0x: '没有效果',
+        badge_shiny: '✨ 闪光', badge_mythical: '幻之', badge_legendary: '传说', error_no_pokemon: '没有找到符合条件的宝可梦。',
+        prob_never: '不会出现 (0%)', prob_always: '必定出现 (100%)'
+    },
+    'fr': {
+        filter_title: 'Filtres', filter_desc: 'Sélectionnez', btn_select_all: 'Tout Cocher', btn_deselect_all: 'Tout Décocher',
+        gen_title: 'Génération', type_title: 'Type', special_title: 'Spécial',
+        filter_legendary: 'Inclure Légendaire', filter_mythical: 'Inclure Fabuleux', filter_normal: 'Inclure Normal', option_title: 'Options',
+        lang_title: 'Langue (Language)', draw_count_title: 'Tirages', draw_count_unit: 'Pkmn', shiny_prob_title: 'Taux Chromatique',
+        main_title: 'Aléatoire', draw_instruction: 'Cliquez sur la Poké Ball !', loading_text: 'Recherche...',
+        btn_draw_again: 'Tirer à nouveau', stat_height: 'Taille', stat_weight: 'Poids', base_stats_title: 'Stats de base', matchups_title: 'Faiblesses',
+        matchup_4x: 'Très Faible', matchup_2x: 'Faible', matchup_05x: 'Résistant', matchup_025x: 'Très Résistant', matchup_0x: 'Immunisé',
+        badge_shiny: '✨ Chromatique', badge_mythical: 'Fabuleux', badge_legendary: 'Légendaire', error_no_pokemon: 'Aucun Pokémon trouvé.',
+        prob_never: 'Jamais (0%)', prob_always: 'Toujours (100%)'
+    },
+    'it': {
+        filter_title: 'Filtri', filter_desc: 'Seleziona', btn_select_all: 'Sel. tutto', btn_deselect_all: 'Desel. tutto',
+        gen_title: 'Generazione', type_title: 'Tipo', special_title: 'Speciale',
+        filter_legendary: 'Includi Leggendari', filter_mythical: 'Includi Misteriosi', filter_normal: 'Includi Normali', option_title: 'Opzioni',
+        lang_title: 'Lingua (Language)', draw_count_title: 'Estrazioni', draw_count_unit: 'Pkmn', shiny_prob_title: 'Tasso Cromatico',
+        main_title: 'Casuale', draw_instruction: 'Clicca sulla Poké Ball!', loading_text: 'Ricerca...',
+        btn_draw_again: 'Estrai di nuovo', stat_height: 'Altezza', stat_weight: 'Peso', base_stats_title: 'Statistiche base', matchups_title: 'Debolezze',
+        matchup_4x: 'Molto Debole', matchup_2x: 'Debole', matchup_05x: 'Resistente', matchup_025x: 'Molto Resistente', matchup_0x: 'Immune',
+        badge_shiny: '✨ Cromatico', badge_mythical: 'Misterioso', badge_legendary: 'Leggendario', error_no_pokemon: 'Nessun Pokémon trovato.',
+        prob_never: 'Mai (0%)', prob_always: 'Sempre (100%)'
+    },
+    'es': {
+        filter_title: 'Filtros', filter_desc: 'Selecciona', btn_select_all: 'Sel. Todo', btn_deselect_all: 'Desel. Todo',
+        gen_title: 'Generación', type_title: 'Tipo', special_title: 'Especial',
+        filter_legendary: 'Incluir Legendarios', filter_mythical: 'Incluir Singulares', filter_normal: 'Incluir Normales', option_title: 'Opciones',
+        lang_title: 'Idioma (Language)', draw_count_title: 'Extracciones', draw_count_unit: 'Pkmn', shiny_prob_title: 'Tasa Variocolor',
+        main_title: 'Aleatorio', draw_instruction: '¡Haz clic en la Poké Ball!', loading_text: 'Buscando...',
+        btn_draw_again: 'Sacar de nuevo', stat_height: 'Altura', stat_weight: 'Peso', base_stats_title: 'Características base', matchups_title: 'Debilidades',
+        matchup_4x: 'Muy Débil', matchup_2x: 'Débil', matchup_05x: 'C. Eficaz', matchup_025x: 'Muy C. Eficaz', matchup_0x: 'Inmune',
+        badge_shiny: '✨ Variocolor', badge_mythical: 'Singular', badge_legendary: 'Legendario', error_no_pokemon: 'No se encontraron Pokémon.',
+        prob_never: 'Nunca (0%)', prob_always: 'Siempre (100%)'
+    },
+    'de': {
+        filter_title: 'Filter', filter_desc: 'Bedingungen wählen', btn_select_all: 'Alle ausw.', btn_deselect_all: 'Alle abw.',
+        gen_title: 'Generation', type_title: 'Typ', special_title: 'Spezial',
+        filter_legendary: 'Legendär inkl.', filter_mythical: 'Mysteriös inkl.', filter_normal: 'Normal inkl.', option_title: 'Optionen',
+        lang_title: 'Sprache (Language)', draw_count_title: 'Ziehungen', draw_count_unit: 'Pkmn', shiny_prob_title: 'Schillernd Rate',
+        main_title: 'Zufall', draw_instruction: 'Klick auf Pokéball!', loading_text: 'Suche Pokémon...',
+        btn_draw_again: 'Nochmal ziehen', stat_height: 'Größe', stat_weight: 'Gewicht', base_stats_title: 'Basiswerte', matchups_title: 'Schwächen',
+        matchup_4x: 'Sehr Schwach', matchup_2x: 'Schwach', matchup_05x: 'Resistent', matchup_025x: 'Sehr Resistent', matchup_0x: 'Immun',
+        badge_shiny: '✨ Schillernd', badge_mythical: 'Mysteriös', badge_legendary: 'Legendär', error_no_pokemon: 'Keine Pokémon gefunden.',
+        prob_never: 'Nie (0%)', prob_always: 'Immer (100%)'
     }
 };
 
 let currentLang = 'ko';
 
 const STAT_NAMES_KO = {
-    'hp': { ko: 'HP', en: 'HP', ja: 'HP' },
-    'attack': { ko: '공격', en: 'Attack', ja: 'こうげき' },
-    'defense': { ko: '방어', en: 'Defense', ja: 'ぼうぎょ' },
-    'special-attack': { ko: '특공', en: 'Sp.Atk', ja: 'とくこう' },
-    'special-defense': { ko: '특방', en: 'Sp.Def', ja: 'とくぼう' },
-    'speed': { ko: '스피드', en: 'Speed', ja: 'すばやさ' }
+    'hp': { ko: 'HP', en: 'HP', ja: 'HP', 'zh-Hans': 'HP', fr: 'PV', it: 'PS', es: 'PS', de: 'KP' },
+    'attack': { ko: '공격', en: 'Attack', ja: 'こうげき', 'zh-Hans': '攻击', fr: 'Attaque', it: 'Attacco', es: 'Ataque', de: 'Angriff' },
+    'defense': { ko: '방어', en: 'Defense', ja: 'ぼうぎょ', 'zh-Hans': '防御', fr: 'Défense', it: 'Difesa', es: 'Defensa', de: 'Vert.' },
+    'special-attack': { ko: '특공', en: 'Sp.Atk', ja: 'とくこう', 'zh-Hans': '特攻', fr: 'Atq. Spé.', it: 'Att. Sp.', es: 'Atq. Esp.', de: 'Sp.-Ang.' },
+    'special-defense': { ko: '특방', en: 'Sp.Def', ja: 'とくぼう', 'zh-Hans': '特防', fr: 'Déf. Spé.', it: 'Dif. Sp.', es: 'Def. Esp.', de: 'Sp.-Ver.' },
+    'speed': { ko: '스피드', en: 'Speed', ja: 'すばやさ', 'zh-Hans': '速度', fr: 'Vitesse', it: 'Velocità', es: 'Velocidad', de: 'Initiative' }
 };
 
 const STAT_COLORS = {
@@ -152,8 +210,8 @@ function updateLanguage() {
     const shinySelect = document.getElementById('shiny-prob');
     if (shinySelect) {
         Array.from(shinySelect.options).forEach(opt => {
-            if (opt.value === "0") opt.text = currentLang === 'ko' ? "등장 안함 (0%)" : (currentLang === 'en' ? "Never (0%)" : "出現しない (0%)");
-            if (opt.value === "1") opt.text = currentLang === 'ko' ? "무조건 등장 (100%)" : (currentLang === 'en' ? "Always (100%)" : "必ず出現 (100%)");
+            if (opt.value === "0") opt.text = dict['prob_never'] || "Never (0%)";
+            if (opt.value === "1") opt.text = dict['prob_always'] || "Always (100%)";
         });
     }
 }
