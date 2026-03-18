@@ -683,6 +683,12 @@ function createCardElement(pokemon) {
     if (pokemon.isMythical) badgesHtml += `<span class="special-badge">${I18N[currentLang]['badge_mythical']}</span>`;
     else if (pokemon.isLegendary) badgesHtml += `<span class="special-badge" style="background: linear-gradient(135deg, #a855f7, #7e22ce)">${I18N[currentLang]['badge_legendary']}</span>`;
 
+    const nameCap = pokemon.nameEn.charAt(0).toUpperCase() + pokemon.nameEn.slice(1);
+    const wikiLangMap = { 'ko': 'ko', 'en': 'en', 'ja': 'ja', 'fr': 'fr', 'es': 'es', 'de': 'de', 'it': 'it' };
+    const wikiLang = wikiLangMap[currentLang] || 'en';
+    const wikiName = wikiLang === 'en' ? nameCap : pokeName;
+    const wikiUrl = wikiLang === 'en' ? `https://pokemon.fandom.com/wiki/${wikiName}` : `https://pokemon.fandom.com/${wikiLang}/wiki/${wikiName}`;
+
     container.innerHTML = `
         <div class="pokemon-card">
             <div class="card-inner">
@@ -696,7 +702,9 @@ function createCardElement(pokemon) {
                         <h2 class="poke-name">${pokeName}</h2>
                     </div>
                     <div class="poke-image-container">
-                        <img src="${pokemon.image}" alt="Pokemon" class="poke-image">
+                        <a href="${wikiUrl}" target="_blank" rel="noopener noreferrer" style="cursor: pointer; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;" title="포켓몬 위키 열기">
+                            <img src="${pokemon.image}" alt="Pokemon" class="poke-image">
+                        </a>
                     </div>
                     <div class="poke-types">
                         ${typesHtml}
