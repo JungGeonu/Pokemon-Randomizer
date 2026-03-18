@@ -231,12 +231,27 @@ function playPokeballSound() {
 }
 
 const pokeballOpenAudio = new Audio('https://www.myinstants.com/media/sounds/sound-effects-pokemon-anime-7-pokemon-out.mp3');
-pokeballOpenAudio.volume = 0.6;
+pokeballOpenAudio.volume = 0.35; // 볼륨 약간 감소
 
 function playPokeballOpenSound() {
     try {
+        pokeballOpenAudio.volume = 0.35; // 볼륨 복구
         pokeballOpenAudio.currentTime = 0;
         pokeballOpenAudio.play().catch(e => console.error("Pokeball open audio play failed:", e));
+        
+        // 뒷부분 긴 하이라이트/잔음(쉬익-) 소리가 길어서 페이드 아웃으로 단축
+        setTimeout(() => {
+            let fadeCount = 0;
+            const fadeInterval = setInterval(() => {
+                if (pokeballOpenAudio.volume > 0.05) {
+                    pokeballOpenAudio.volume = Math.max(0, pokeballOpenAudio.volume - 0.05);
+                    fadeCount++;
+                } else {
+                    clearInterval(fadeInterval);
+                    pokeballOpenAudio.pause();
+                }
+            }, 20); // 아주 짧은 주기로 자연스럽게 볼륨 다운
+        }, 800); // 0.8초간 플레이 후 페이드 아웃 시작
     } catch (e) {
         console.error(e);
     }
