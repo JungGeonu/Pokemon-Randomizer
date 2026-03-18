@@ -280,13 +280,19 @@ body {
     font-family: 'Lilita One', 'Jua', 'Noto Sans KR', sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background: linear-gradient(to bottom, #fff9c4, #FFCB05 50%, #f0a500);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 8px #1a56a0;
-    paint-order: stroke fill;
-    filter: drop-shadow(0 4px 0 #0d2e6e) drop-shadow(0 0 18px rgba(255, 203, 5, 0.45));
+    color: #FFCB05;
+    -webkit-text-fill-color: #FFCB05;
+    background: none;
+    text-shadow:
+        -4px -4px 0 #1a56a0,  4px -4px 0 #1a56a0,
+        -4px  4px 0 #1a56a0,  4px  4px 0 #1a56a0,
+         0   -4px 0 #1a56a0,  0    4px 0 #1a56a0,
+        -4px  0   0 #1a56a0,  4px  0   0 #1a56a0,
+        -3px -4px 0 #1a56a0,  3px -4px 0 #1a56a0,
+        -3px  4px 0 #1a56a0,  3px  4px 0 #1a56a0,
+        -4px -3px 0 #1a56a0,  4px -3px 0 #1a56a0,
+        -4px  3px 0 #1a56a0,  4px  3px 0 #1a56a0,
+         0    7px 0 rgba(10, 30, 100, 0.5);
     line-height: 1.3;
     word-break: keep-all;
 }
