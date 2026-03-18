@@ -57,6 +57,10 @@ const resultState = document.getElementById('result-state');
 const cardsGrid = document.getElementById('cards-grid');
 const toastEl = document.getElementById('toast');
 
+// 오디오 자동 재생 차단(어뷰징 방지)을 피하기 위한 전역 Audio 객체
+const shinyAudio = new Audio('https://play.pokemonshowdown.com/audio/shiny.mp3');
+shinyAudio.volume = 0.5;
+
 const STAT_NAMES_KO = {
     'hp': 'HP',
     'attack': '공격',
@@ -198,6 +202,11 @@ async function calculateTypeMatchups(pokeTypes) {
 
 // Draw Logic
 async function startDraw() {
+    // 브라우저의 오디오 자동재생 정책을 통과하기 위해 클릭 이벤트 직후에 오디오 재생 권한을 얻습니다.
+    shinyAudio.play().catch(() => {});
+    shinyAudio.pause();
+    shinyAudio.currentTime = 0;
+
     const selectedGens = Array.from(document.querySelectorAll('input[name="gen"]:checked')).map(cb => parseInt(cb.value));
     const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => cb.value);
     
@@ -358,9 +367,8 @@ function renderCards(pokemons) {
             if (cardInner) {
                 cardInner.classList.add('flipped');
                 if (pokemon.isShiny) {
-                    const audio = new Audio('https://play.pokemonshowdown.com/audio/shiny.mp3');
-                    audio.volume = 0.5;
-                    audio.play().catch(e => console.error("Audio play failed:", e));
+                    shinyAudio.currentTime = 0;
+                    shinyAudio.play().catch(e => console.error("Audio play failed:", e));
                 }
             }
         }, 500 + (index * 200));
@@ -492,6 +500,11 @@ function createCardElement(pokemon) {
 
 // Draw a single card individually
 async function redrawSingleCard(btn) {
+    // 개별 다시보기 버튼 클릭 시에도 재생 권한 통과 처리
+    shinyAudio.play().catch(() => {});
+    shinyAudio.pause();
+    shinyAudio.currentTime = 0;
+
     const containerEl = btn.closest('.pokemon-card-container');
     if (!containerEl) return;
     
@@ -628,9 +641,8 @@ async function redrawSingleCard(btn) {
                     if (newInner) {
                         newInner.classList.add('flipped');
                         if (foundPokemon.isShiny) {
-                            const audio = new Audio('https://play.pokemonshowdown.com/audio/shiny.mp3');
-                            audio.volume = 0.5;
-                            audio.play().catch(e => console.error("Audio play failed:", e));
+                            shinyAudio.currentTime = 0;
+                            shinyAudio.play().catch(e => console.error("Audio play failed:", e));
                         }
                     }
                     
