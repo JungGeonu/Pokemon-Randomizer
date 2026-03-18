@@ -667,20 +667,55 @@ body {
     color: #fff;
 }
 
-/* Base Stats */
+/* Accordion styles inside card */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 4px;
+}
+
+.accordion-header .arrow {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+    background: rgba(255,b255,255,0.1);
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.accordion.open .arrow {
+    transform: rotate(90deg);
+}
+
+.accordion-content {
+    max-height: 400px;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s, margin-top 0.2s;
+    opacity: 1;
+    margin-top: 8px;
+}
+
+.accordion.closed .accordion-content {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
+
 .poke-base-stats {
     position: relative;
     z-index: 1;
     background: rgba(0,0,0,0.2);
     border-radius: 16px;
     padding: 12px;
+    margin-bottom: 12px;
 }
 
 .base-stats-title {
     font-size: 0.85rem;
     color: var(--text-secondary);
-    margin-bottom: 8px;
-    text-align: center;
+    text-align: left;
     font-weight: 700;
 }
 

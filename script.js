@@ -163,8 +163,10 @@ const POKEBALL_TYPES = [
 // DOM Elements
 const genFiltersContainer = document.getElementById('gen-filters');
 const typeFiltersContainer = document.getElementById('type-filters');
-const btnSelectAll = document.getElementById('btn-select-all');
-const btnDeselectAll = document.getElementById('btn-deselect-all');
+const btnGenAll = document.getElementById('btn-gen-all');
+const btnGenNone = document.getElementById('btn-gen-none');
+const btnTypeAll = document.getElementById('btn-type-all');
+const btnTypeNone = document.getElementById('btn-type-none');
 const btnDraw = document.getElementById('btn-draw');
 const btnDrawAgain = document.getElementById('btn-draw-again');
 const drawCountInput = document.getElementById('draw-count');
@@ -311,8 +313,10 @@ function setupEventListeners() {
     const langSelect = document.getElementById('lang-select');
     if (langSelect) langSelect.addEventListener('change', updateLanguage);
 
-    btnSelectAll.addEventListener('click', () => toggleAllFilters(true));
-    btnDeselectAll.addEventListener('click', () => toggleAllFilters(false));
+    if (btnGenAll) btnGenAll.addEventListener('click', () => toggleFilters('gen', true));
+    if (btnGenNone) btnGenNone.addEventListener('click', () => toggleFilters('gen', false));
+    if (btnTypeAll) btnTypeAll.addEventListener('click', () => toggleFilters('type', true));
+    if (btnTypeNone) btnTypeNone.addEventListener('click', () => toggleFilters('type', false));
     
     btnDraw.addEventListener('click', startDraw);
     btnDrawAgain.addEventListener('click', () => {
@@ -321,8 +325,18 @@ function setupEventListeners() {
         showState('idle');
     });
 
-    // Card click to flip via Event Delegation
+    // Card click to flip and accordion toggle via Event Delegation
     cardsGrid.addEventListener('click', (e) => {
+        const accordionHeader = e.target.closest('.accordion-header');
+        if (accordionHeader) {
+            const accordion = accordionHeader.closest('.accordion');
+            if (accordion) {
+                accordion.classList.toggle('closed');
+                accordion.classList.toggle('open');
+            }
+            return; // Prevent triggering card flip
+        }
+
         const cardFront = e.target.closest('.card-front');
         const cardInner = e.target.closest('.pokemon-card');
         if (cardFront && cardInner) {
@@ -331,8 +345,8 @@ function setupEventListeners() {
     });
 }
 
-function toggleAllFilters(checked) {
-    document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(cb => {
+function toggleFilters(name, checked) {
+    document.querySelectorAll(`.sidebar input[name="${name}"]`).forEach(cb => {
         cb.checked = checked;
     });
 }
@@ -693,16 +707,26 @@ function createCardElement(pokemon) {
                             <span class="stat-value">${(pokemon.weight / 10).toFixed(1)}kg</span>
                         </div>
                     </div>
-                    <div class="poke-base-stats">
-                        <h4 class="base-stats-title">${I18N[currentLang]['base_stats_title']}</h4>
-                        <div class="stat-bars">
-                            ${statsHtml}
+                    <div class="poke-base-stats accordion closed">
+                        <div class="accordion-header">
+                            <h4 class="base-stats-title">${I18N[currentLang]['base_stats_title']}</h4>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="stat-bars">
+                                ${statsHtml}
+                            </div>
                         </div>
                     </div>
-                    <div class="poke-matchups-container">
-                        <h4 class="base-stats-title">${I18N[currentLang]['matchups_title']}</h4>
-                        <div class="matchups-list">
-                            ${matchupsHtml}
+                    <div class="poke-matchups-container accordion closed">
+                        <div class="accordion-header">
+                            <h4 class="base-stats-title">${I18N[currentLang]['matchups_title']}</h4>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="matchups-list">
+                                ${matchupsHtml}
+                            </div>
                         </div>
                     </div>
                     <div class="card-badges">
