@@ -178,10 +178,6 @@ const resultState = document.getElementById('result-state');
 const cardsGrid = document.getElementById('cards-grid');
 const toastEl = document.getElementById('toast');
 
-// 오디오 자동 재생 차단(어뷰징 방지)을 피하기 위한 전역 Audio 객체
-const shinyAudio = new Audio('https://raw.githubusercontent.com/jordles/Kalos-Pokedex/main/shiny.mp3');
-shinyAudio.volume = 0.5;
-
 let audioCtx = null;
 function playPokeballSound() {
     try {
@@ -201,7 +197,7 @@ function playPokeballSound() {
         osc.frequency.setValueAtTime(800, audioCtx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
         
-        gain.gain.setValueAtTime(0.03, audioCtx.currentTime); // Reduced further to 0.03
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
         
         osc.start(audioCtx.currentTime);
@@ -228,31 +224,6 @@ function playPokeballSound() {
         
         noise.start(audioCtx.currentTime + 0.05);
     } catch (e) { console.error(e); }
-}
-
-const pokeballOpenAudio = new Audio('https://www.myinstants.com/media/sounds/sound-effects-pokemon-anime-7-pokemon-out.mp3');
-pokeballOpenAudio.volume = 0.2; // 볼륨 0.2로 추가 감소
-
-function playPokeballOpenSound() {
-    try {
-        pokeballOpenAudio.volume = 0.2; // 볼륨 복구 (0.2)
-        pokeballOpenAudio.currentTime = 0;
-        pokeballOpenAudio.play().catch(e => console.error("Pokeball open audio play failed:", e));
-        
-        // 더 미세한 단감량과 짧은 주기로 부드럽고 티가 잘 나는 페이드 아웃 구현
-        setTimeout(() => {
-            const fadeInterval = setInterval(() => {
-                if (pokeballOpenAudio.volume > 0.01) {
-                    pokeballOpenAudio.volume = Math.max(0, pokeballOpenAudio.volume - 0.008); // 감량폭을 미세하게 조절
-                } else {
-                    clearInterval(fadeInterval);
-                    pokeballOpenAudio.pause();
-                }
-            }, 12); // 인더스 주기 12ms로 부드럽게 감쇠
-        }, 1200); // 1.2초 후 페이드 시작해서 서서히 닫음
-    } catch (e) {
-        console.error(e);
-    }
 }
 
 function createPokeballParticles() {
@@ -420,16 +391,10 @@ function setupEventListeners() {
                 const pokeId = containerEl ? parseInt(containerEl.dataset.pokeId) : null;
                 const pokemon = window.lastDrawnPokemons ? window.lastDrawnPokemons.find(p => p.id === pokeId) : null;
                 
-                if (pokemon) {
-                    if (pokemon.isShiny) {
-                        shinyAudio.currentTime = 0;
-                        shinyAudio.play().catch(e => console.error("Shiny Sound failed:", e));
-                    }
-                    if (pokemon.cry) {
-                        const cryAudio = new Audio(pokemon.cry);
-                        cryAudio.volume = 0.05; // Reduced volume
-                        cryAudio.play().catch(() => {});
-                    }
+                if (pokemon && pokemon.cry) {
+                    const cryAudio = new Audio(pokemon.cry);
+                    cryAudio.volume = 0.05;
+                    cryAudio.play().catch(() => {});
                 }
             }
         }
@@ -492,10 +457,6 @@ async function calculateTypeMatchups(pokeTypes) {
 
 // Draw Logic
 async function startDraw() {
-    // 브라우저의 오디오 자동재생 정책을 통과하기 위해 클릭 이벤트 직후에 오디오 재생 권한을 얻습니다.
-    shinyAudio.play().catch(() => {});
-    shinyAudio.pause();
-    shinyAudio.currentTime = 0;
 
     const selectedGens = Array.from(document.querySelectorAll('input[name="gen"]:checked')).map(cb => parseInt(cb.value));
     const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => cb.value);
@@ -551,7 +512,6 @@ async function startDraw() {
         btnDraw.classList.remove('shake-animation');
         btnDraw.classList.add('open-animation');
         createPokeballParticles(); // trigger particles
-        playPokeballOpenSound();
     }, 600);
 
     setTimeout(async () => {
@@ -824,11 +784,6 @@ function createCardElement(pokemon) {
 
 // Draw a single card individually
 async function redrawSingleCard(btn) {
-    // 개별 다시보기 버튼 클릭 시에도 재생 권한 통과 처리
-    shinyAudio.play().catch(() => {});
-    shinyAudio.pause();
-    shinyAudio.currentTime = 0;
-
     const containerEl = btn.closest('.pokemon-card-container');
     if (!containerEl) return;
     
