@@ -249,7 +249,7 @@ function playPokeballOpenSound() {
                     pokeballOpenAudio.pause();
                 }
             }, 12); // 인더스 주기 12ms로 부드럽게 감쇠
-        }, 1000); // 1.0초 후 페이드 시작해서 서서히 닫음
+        }, 1200); // 1.2초 후 페이드 시작해서 서서히 닫음
     } catch (e) {
         console.error(e);
     }
