@@ -709,21 +709,14 @@ function createCardElement(pokemon) {
                     </div>
                     <div class="poke-base-stats accordion closed">
                         <div class="accordion-header">
-                            <h4 class="base-stats-title">${I18N[currentLang]['base_stats_title']}</h4>
+                            <h4 class="base-stats-title">${I18N[currentLang]['base_stats_title']} / ${I18N[currentLang]['matchups_title']}</h4>
                             <span class="arrow">▶</span>
                         </div>
                         <div class="accordion-content">
                             <div class="stat-bars">
                                 ${statsHtml}
                             </div>
-                        </div>
-                    </div>
-                    <div class="poke-matchups-container accordion closed">
-                        <div class="accordion-header">
-                            <h4 class="base-stats-title">${I18N[currentLang]['matchups_title']}</h4>
-                            <span class="arrow">▶</span>
-                        </div>
-                        <div class="accordion-content">
+                            <div style="margin: 12px 0; border-top: 1px solid rgba(255,255,255,0.05);"></div>
                             <div class="matchups-list">
                                 ${matchupsHtml}
                             </div>
