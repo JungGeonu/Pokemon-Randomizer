@@ -297,11 +297,15 @@ async function startDraw() {
 
                     if (!hasMatchingType) return null;
 
-                    let shinyProb = parseFloat(shinyProbInput.value);
-                    if (isNaN(shinyProb) || shinyProb < 0) shinyProb = 0;
-                    if (shinyProb > 100) shinyProb = 100;
-                    
-                    const isShiny = Math.random() < (shinyProb / 100);
+                    const probStr = shinyProbInput.value;
+                    let probability = 0;
+                    if (probStr.includes('/')) {
+                        const [num, den] = probStr.split('/');
+                        probability = parseInt(num) / parseInt(den);
+                    } else {
+                        probability = parseFloat(probStr);
+                    }
+                    const isShiny = Math.random() < probability;
                     const matchups = await calculateTypeMatchups(pokeTypes);
 
                     return {
@@ -356,6 +360,7 @@ function renderCards(pokemons) {
     else if (count >= 3) scale = 0.85;
     
     cardsGrid.style.setProperty('--card-scale', scale);
+    let shinySoundPlayed = false;
     
     pokemons.forEach((pokemon, index) => {
         const cardEl = createCardElement(pokemon);
@@ -366,9 +371,10 @@ function renderCards(pokemons) {
             const cardInner = cardEl.querySelector('.pokemon-card');
             if (cardInner) {
                 cardInner.classList.add('flipped');
-                if (pokemon.isShiny) {
+                if (pokemon.isShiny && !shinySoundPlayed) {
                     shinyAudio.currentTime = 0;
                     shinyAudio.play().catch(e => console.error("Audio play failed:", e));
+                    shinySoundPlayed = true;
                 }
             }
         }, 500 + (index * 200));
@@ -388,8 +394,14 @@ function createCardElement(pokemon) {
     container.dataset.pokeId = pokemon.id;
     
     const formattedId = `#${String(pokemon.id).padStart(3, '0')}`;
-    const krNameObj = pokemon.species.names.find(n => n.language.name === 'ko');
-    const pokeName = krNameObj ? krNameObj.name : pokemon.nameEn;
+    
+    const langSelect = document.getElementById('lang-select');
+    const currentLang = langSelect ? langSelect.value : 'ko';
+    
+    let nameObj = pokemon.species.names.find(n => n.language.name === currentLang);
+    if (!nameObj && currentLang === 'ja') nameObj = pokemon.species.names.find(n => n.language.name === 'ja-Hrkt');
+    
+    const pokeName = nameObj ? nameObj.name : pokemon.nameEn;
     
     const primaryType = TYPES.find(t => t.id === pokemon.types[0]);
     const bgStyle = primaryType ? `background: linear-gradient(135deg, ${primaryType.color} 0%, rgba(30, 41, 59, 0.9) 100%);` : '';
@@ -598,11 +610,15 @@ async function redrawSingleCard(btn) {
 
                     if (!hasMatchingType) return null;
 
-                    let shinyProb = parseFloat(shinyProbInput.value);
-                    if (isNaN(shinyProb) || shinyProb < 0) shinyProb = 0;
-                    if (shinyProb > 100) shinyProb = 100;
-                    
-                    const isShiny = Math.random() < (shinyProb / 100);
+                    const probStr = shinyProbInput.value;
+                    let probability = 0;
+                    if (probStr.includes('/')) {
+                        const [num, den] = probStr.split('/');
+                        probability = parseInt(num) / parseInt(den);
+                    } else {
+                        probability = parseFloat(probStr);
+                    }
+                    const isShiny = Math.random() < probability;
                     const matchups = await calculateTypeMatchups(pokeTypes);
 
                     return {
