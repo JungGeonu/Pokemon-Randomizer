@@ -340,7 +340,26 @@ function setupEventListeners() {
         const cardFront = e.target.closest('.card-front');
         const cardInner = e.target.closest('.pokemon-card');
         if (cardFront && cardInner) {
-            cardInner.classList.add('flipped');
+            if (!cardInner.classList.contains('flipped')) {
+                cardInner.classList.add('flipped');
+                playPokeballSound();
+                
+                const containerEl = cardInner.closest('.pokemon-card-container');
+                const pokeId = containerEl ? parseInt(containerEl.dataset.pokeId) : null;
+                const pokemon = window.lastDrawnPokemons ? window.lastDrawnPokemons.find(p => p.id === pokeId) : null;
+                
+                if (pokemon) {
+                    if (pokemon.isShiny) {
+                        shinyAudio.currentTime = 0;
+                        shinyAudio.play().catch(e => console.error("Shiny Sound failed:", e));
+                    }
+                    if (pokemon.cry) {
+                        const cryAudio = new Audio(pokemon.cry);
+                        cryAudio.volume = 0.3;
+                        cryAudio.play().catch(() => {});
+                    }
+                }
+            }
         }
     });
 }
@@ -534,7 +553,8 @@ async function startDraw() {
                         species: speciesData,
                         isLegendary,
                         isMythical,
-                        isShiny
+                        isShiny,
+                        cry: pokeData.cries ? pokeData.cries.latest : null
                     };
                 } catch (err) {
                     console.error("Fetch error:", err);
@@ -554,6 +574,7 @@ async function startDraw() {
             if (foundPokemons.length < drawCount) {
                 showToast(`조건에 맞는 포켓몬이 적어 ${foundPokemons.length}마리만 찾았습니다.`);
             }
+            window.lastDrawnPokemons = foundPokemons;
             renderCards(foundPokemons);
         } else {
             showToast("선택한 필터 조합에 해당하는 포켓몬을 찾기 어렵습니다. 조건을 완화해주세요.");
@@ -580,24 +601,7 @@ function renderCards(pokemons) {
         const cardEl = createCardElement(pokemon);
         cardsGrid.appendChild(cardEl);
         
-        // Auto-flip and animate stats
-        setTimeout(() => {
-            const cardInner = cardEl.querySelector('.pokemon-card');
-            if (cardInner) {
-                cardInner.classList.add('flipped');
-                playPokeballSound();
-                if (pokemon.isShiny && !shinySoundPlayed) {
-                    shinyAudio.currentTime = 0;
-                    shinyAudio.play().catch(e => console.error("Audio play failed:", e));
-                    shinySoundPlayed = true;
-                }
-                if (pokemon.cry) {
-                    const cryAudio = new Audio(pokemon.cry);
-                    cryAudio.volume = 0.3;
-                    cryAudio.play().catch(() => {});
-                }
-            }
-        }, 500 + (index * 200));
+        // Removed automated flip sequential intervals so user clicks to reveal.
         
         setTimeout(() => {
             const innerBars = cardEl.querySelectorAll('.stat-bar-inner');
