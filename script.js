@@ -8,66 +8,81 @@ const MYTHICAL_IDS = [151, 251, 385, 386, 489, 490, 491, 492, 493, 494, 647, 648
 
 // Generation Data
 const GENERATIONS = [
-    { id: 1, name: '1세대', start: 1, end: 151 },
-    { id: 2, name: '2세대', start: 152, end: 251 },
-    { id: 3, name: '3세대', start: 252, end: 386 },
-    { id: 4, name: '4세대', start: 387, end: 493 },
-    { id: 5, name: '5세대', start: 494, end: 649 },
-    { id: 6, name: '6세대', start: 650, end: 721 },
-    { id: 7, name: '7세대', start: 722, end: 809 },
-    { id: 8, name: '8세대', start: 810, end: 905 },
-    { id: 9, name: '9세대', start: 906, end: 1025 }
+    { id: 1, names: { ko: '1세대', en: 'Gen 1', ja: '第1世代' }, start: 1, end: 151 },
+    { id: 2, names: { ko: '2세대', en: 'Gen 2', ja: '第2世代' }, start: 152, end: 251 },
+    { id: 3, names: { ko: '3세대', en: 'Gen 3', ja: '第3世代' }, start: 252, end: 386 },
+    { id: 4, names: { ko: '4세대', en: 'Gen 4', ja: '第4世代' }, start: 387, end: 493 },
+    { id: 5, names: { ko: '5세대', en: 'Gen 5', ja: '第5世代' }, start: 494, end: 649 },
+    { id: 6, names: { ko: '6세대', en: 'Gen 6', ja: '第6世代' }, start: 650, end: 721 },
+    { id: 7, names: { ko: '7세대', en: 'Gen 7', ja: '第7世代' }, start: 722, end: 809 },
+    { id: 8, names: { ko: '8세대', en: 'Gen 8', ja: '第8世代' }, start: 810, end: 905 },
+    { id: 9, names: { ko: '9세대', en: 'Gen 9', ja: '第9世代' }, start: 906, end: 1025 }
 ];
 
 // Type Data
 const TYPES = [
-    { id: 'normal', name: '노말', color: 'var(--type-normal)' },
-    { id: 'fire', name: '불꽃', color: 'var(--type-fire)' },
-    { id: 'water', name: '물', color: 'var(--type-water)' },
-    { id: 'electric', name: '전기', color: 'var(--type-electric)' },
-    { id: 'grass', name: '풀', color: 'var(--type-grass)' },
-    { id: 'ice', name: '얼음', color: 'var(--type-ice)' },
-    { id: 'fighting', name: '격투', color: 'var(--type-fighting)' },
-    { id: 'poison', name: '독', color: 'var(--type-poison)' },
-    { id: 'ground', name: '땅', color: 'var(--type-ground)' },
-    { id: 'flying', name: '비행', color: 'var(--type-flying)' },
-    { id: 'psychic', name: '에스퍼', color: 'var(--type-psychic)' },
-    { id: 'bug', name: '벌레', color: 'var(--type-bug)' },
-    { id: 'rock', name: '바위', color: 'var(--type-rock)' },
-    { id: 'ghost', name: '고스트', color: 'var(--type-ghost)' },
-    { id: 'dragon', name: '드래곤', color: 'var(--type-dragon)' },
-    { id: 'dark', name: '악', color: 'var(--type-dark)' },
-    { id: 'steel', name: '강철', color: 'var(--type-steel)' },
-    { id: 'fairy', name: '페어리', color: 'var(--type-fairy)' }
+    { id: 'normal', names: { ko: '노말', en: 'Normal', ja: 'ノーマル' }, color: 'var(--type-normal)' },
+    { id: 'fire', names: { ko: '불꽃', en: 'Fire', ja: 'ほのお' }, color: 'var(--type-fire)' },
+    { id: 'water', names: { ko: '물', en: 'Water', ja: 'みず' }, color: 'var(--type-water)' },
+    { id: 'electric', names: { ko: '전기', en: 'Electric', ja: 'でんき' }, color: 'var(--type-electric)' },
+    { id: 'grass', names: { ko: '풀', en: 'Grass', ja: 'くさ' }, color: 'var(--type-grass)' },
+    { id: 'ice', names: { ko: '얼음', en: 'Ice', ja: 'こおり' }, color: 'var(--type-ice)' },
+    { id: 'fighting', names: { ko: '격투', en: 'Fighting', ja: 'かくとう' }, color: 'var(--type-fighting)' },
+    { id: 'poison', names: { ko: '독', en: 'Poison', ja: 'どく' }, color: 'var(--type-poison)' },
+    { id: 'ground', names: { ko: '땅', en: 'Ground', ja: 'じめん' }, color: 'var(--type-ground)' },
+    { id: 'flying', names: { ko: '비행', en: 'Flying', ja: 'ひこう' }, color: 'var(--type-flying)' },
+    { id: 'psychic', names: { ko: '에스퍼', en: 'Psychic', ja: 'エスパー' }, color: 'var(--type-psychic)' },
+    { id: 'bug', names: { ko: '벌레', en: 'Bug', ja: 'むし' }, color: 'var(--type-bug)' },
+    { id: 'rock', names: { ko: '바위', en: 'Rock', ja: 'いわ' }, color: 'var(--type-rock)' },
+    { id: 'ghost', names: { ko: '고스트', en: 'Ghost', ja: 'ゴースト' }, color: 'var(--type-ghost)' },
+    { id: 'dragon', names: { ko: '드래곤', en: 'Dragon', ja: 'ドラゴン' }, color: 'var(--type-dragon)' },
+    { id: 'dark', names: { ko: '악', en: 'Dark', ja: 'あく' }, color: 'var(--type-dark)' },
+    { id: 'steel', names: { ko: '강철', en: 'Steel', ja: 'はがね' }, color: 'var(--type-steel)' },
+    { id: 'fairy', names: { ko: '페어리', en: 'Fairy', ja: 'フェアリー' }, color: 'var(--type-fairy)' }
 ];
 
-// DOM Elements
-const genFiltersContainer = document.getElementById('gen-filters');
-const typeFiltersContainer = document.getElementById('type-filters');
-const btnSelectAll = document.getElementById('btn-select-all');
-const btnDeselectAll = document.getElementById('btn-deselect-all');
-const btnDraw = document.getElementById('btn-draw');
-const btnDrawAgain = document.getElementById('btn-draw-again');
-const drawCountInput = document.getElementById('draw-count');
-const shinyProbInput = document.getElementById('shiny-prob');
+const I18N = {
+    'ko': {
+        filter_title: '필터 설정', filter_desc: '원하는 조건을 선택하세요', btn_select_all: '전체 선택', btn_deselect_all: '전체 해제',
+        gen_title: '세대 (Generation)', type_title: '타입 (Type)', special_title: '특수 (Special)',
+        filter_legendary: '전설 포함', filter_mythical: '환상 포함', filter_normal: '일반 포함', option_title: '옵션 설정',
+        lang_title: '언어 (Language)', draw_count_title: '뽑을 개수', draw_count_unit: '마리', shiny_prob_title: '이로치 확률',
+        main_title: '랜덤 뽑기', draw_instruction: '몬스터볼을 클릭해 포켓몬을 뽑아보세요!', loading_text: '조건에 맞는 포켓몬을 찾는 중...',
+        btn_draw_again: '다시 뽑기', stat_height: '키', stat_weight: '몸무게', base_stats_title: '종족값', matchups_title: '방어 상성',
+        matchup_4x: '치명적', matchup_2x: '약점', matchup_05x: '반감', matchup_025x: '극반감', matchup_0x: '효과없음',
+        badge_shiny: '✨ 이로치', badge_mythical: '환상', badge_legendary: '전설', error_no_pokemon: '조건에 맞는 포켓몬이 없습니다.'
+    },
+    'en': {
+        filter_title: 'Filter Settings', filter_desc: 'Select desired conditions', btn_select_all: 'Select All', btn_deselect_all: 'Deselect All',
+        gen_title: 'Generation', type_title: 'Type', special_title: 'Special',
+        filter_legendary: 'Include Legendary', filter_mythical: 'Include Mythical', filter_normal: 'Include Normal', option_title: 'Options',
+        lang_title: 'Language', draw_count_title: 'Draw Count', draw_count_unit: 'Pkmn', shiny_prob_title: 'Shiny Rate',
+        main_title: 'Randomizer', draw_instruction: 'Click the Pokeball to Draw!', loading_text: 'Searching for Pokemon...',
+        btn_draw_again: 'Draw Again', stat_height: 'Height', stat_weight: 'Weight', base_stats_title: 'Base Stats', matchups_title: 'Type Matchups',
+        matchup_4x: 'Very Weak', matchup_2x: 'Weak', matchup_05x: 'Resist', matchup_025x: 'Strong Resist', matchup_0x: 'Immune',
+        badge_shiny: '✨ Shiny', badge_mythical: 'Mythical', badge_legendary: 'Legendary', error_no_pokemon: 'No Pokemon found for these conditions.'
+    },
+    'ja': {
+        filter_title: 'フィルター設定', filter_desc: '条件を選択してください', btn_select_all: 'すべて選択', btn_deselect_all: 'すべて解除',
+        gen_title: '世代 (Generation)', type_title: 'タイプ (Type)', special_title: '特殊 (Special)',
+        filter_legendary: '伝説を含む', filter_mythical: '幻を含む', filter_normal: '通常を含む', option_title: 'オプション',
+        lang_title: '言語 (Language)', draw_count_title: '引く数', draw_count_unit: '匹', shiny_prob_title: '色違い確率',
+        main_title: 'ランダムガチャ', draw_instruction: 'モンスターボールをクリック！', loading_text: 'ポケモンを探しています...',
+        btn_draw_again: 'もう一度引く', stat_height: '高さ', stat_weight: '重さ', base_stats_title: '種族値', matchups_title: 'タイプ相性',
+        matchup_4x: '効果ばつぐん', matchup_2x: '効果ばつぐん', matchup_05x: '効果はいまひとつ', matchup_025x: '効果はいまひとつ', matchup_0x: '効果なし',
+        badge_shiny: '✨ 色違い', badge_mythical: '幻', badge_legendary: '伝説', error_no_pokemon: '条件に合うポケモンがいません。'
+    }
+};
 
-const idleState = document.getElementById('idle-state');
-const loadingState = document.getElementById('loading-state');
-const resultState = document.getElementById('result-state');
-const cardsGrid = document.getElementById('cards-grid');
-const toastEl = document.getElementById('toast');
-
-// 오디오 자동 재생 차단(어뷰징 방지)을 피하기 위한 전역 Audio 객체
-const shinyAudio = new Audio('https://raw.githubusercontent.com/jordles/Kalos-Pokedex/main/shiny.mp3');
-shinyAudio.volume = 0.5;
+let currentLang = 'ko';
 
 const STAT_NAMES_KO = {
-    'hp': 'HP',
-    'attack': '공격',
-    'defense': '방어',
-    'special-attack': '특공',
-    'special-defense': '특방',
-    'speed': '스피드'
+    'hp': { ko: 'HP', en: 'HP', ja: 'HP' },
+    'attack': { ko: '공격', en: 'Attack', ja: 'こうげき' },
+    'defense': { ko: '방어', en: 'Defense', ja: 'ぼうぎょ' },
+    'special-attack': { ko: '특공', en: 'Sp.Atk', ja: 'とくこう' },
+    'special-defense': { ko: '특방', en: 'Sp.Def', ja: 'とくぼう' },
+    'speed': { ko: '스피드', en: 'Speed', ja: 'すばやさ' }
 };
 
 const STAT_COLORS = {
@@ -92,6 +107,35 @@ function init() {
     renderFilters();
     setupEventListeners();
     randomizePokeball();
+    updateLanguage();
+}
+
+function updateLanguage() {
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) currentLang = langSelect.value;
+    const dict = I18N[currentLang];
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+    });
+
+    document.querySelectorAll('#gen-filters .custom-checkbox').forEach((label, i) => {
+        const textNode = Array.from(label.childNodes).find(n => n.nodeType === 3 && n.textContent.trim());
+        if (textNode && GENERATIONS[i]) textNode.textContent = ' ' + GENERATIONS[i].names[currentLang];
+    });
+    document.querySelectorAll('#type-filters .custom-checkbox').forEach((label, i) => {
+        const textNode = Array.from(label.childNodes).find(n => n.nodeType === 3 && n.textContent.trim());
+        if (textNode && TYPES[i]) textNode.textContent = ' ' + TYPES[i].names[currentLang];
+    });
+    
+    const shinySelect = document.getElementById('shiny-prob');
+    if (shinySelect) {
+        Array.from(shinySelect.options).forEach(opt => {
+            if (opt.value === "0") opt.text = currentLang === 'ko' ? "등장 안함 (0%)" : (currentLang === 'en' ? "Never (0%)" : "出現しない (0%)");
+            if (opt.value === "1") opt.text = currentLang === 'ko' ? "무조건 등장 (100%)" : (currentLang === 'en' ? "Always (100%)" : "必ず出現 (100%)");
+        });
+    }
 }
 
 function randomizePokeball() {
@@ -107,7 +151,7 @@ function renderFilters() {
         label.innerHTML = `
             <input type="checkbox" name="gen" value="${gen.id}" checked>
             <span class="checkmark"></span>
-            ${gen.name}
+            ${gen.names['ko']}
         `;
         genFiltersContainer.appendChild(label);
     });
@@ -119,13 +163,16 @@ function renderFilters() {
         label.innerHTML = `
             <input type="checkbox" name="type" value="${type.id}" checked>
             <span class="checkmark"></span>
-            ${type.name}
+            ${type.names['ko']}
         `;
         typeFiltersContainer.appendChild(label);
     });
 }
 
 function setupEventListeners() {
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) langSelect.addEventListener('change', updateLanguage);
+
     btnSelectAll.addEventListener('click', () => toggleAllFilters(true));
     btnDeselectAll.addEventListener('click', () => toggleAllFilters(false));
     
@@ -288,6 +335,11 @@ async function startDraw() {
                         return null; 
                     }
 
+                    // Nerf spawn probability for Legendary/Mythical by discarding them 90% of the time
+                    if ((isLegendary || isMythical) && Math.random() >= 0.1) {
+                        return null; 
+                    }
+
                     const pokeRes = await fetch(`${POKE_API_URL}/pokemon/${pokeId}`);
                     if (!pokeRes.ok) return null;
                     const pokeData = await pokeRes.json();
@@ -307,6 +359,10 @@ async function startDraw() {
                     }
                     const isShiny = Math.random() < probability;
                     const matchups = await calculateTypeMatchups(pokeTypes);
+                    
+                    const homeImg = pokeData.sprites.other.home;
+                    const officialImg = pokeData.sprites.other['official-artwork'];
+                    const defaultImg = (isShiny ? (homeImg?.front_shiny || officialImg?.front_shiny) : (homeImg?.front_default || officialImg?.front_default)) || pokeData.sprites.front_default;
 
                     return {
                         id: pokeData.id,
@@ -316,7 +372,7 @@ async function startDraw() {
                         weight: pokeData.weight,
                         stats: pokeData.stats,
                         matchups: matchups,
-                        image: (isShiny ? pokeData.sprites.other['official-artwork'].front_shiny : pokeData.sprites.other['official-artwork'].front_default) || pokeData.sprites.front_default,
+                        image: defaultImg,
                         species: speciesData,
                         isLegendary,
                         isMythical,
@@ -408,7 +464,7 @@ function createCardElement(pokemon) {
 
     const typesHtml = pokemon.types.map(typeName => {
         const typeInfo = TYPES.find(t => t.id === typeName);
-        return typeInfo ? `<span class="type-badge" style="background-color: ${typeInfo.color}">${typeInfo.name}</span>` : '';
+        return typeInfo ? `<span class="type-badge" style="background-color: ${typeInfo.color}">${typeInfo.names[currentLang]}</span>` : '';
     }).join('');
 
     const statsHtml = pokemon.stats.map(stat => {
@@ -416,7 +472,7 @@ function createCardElement(pokemon) {
         const statValue = stat.base_stat;
         const percentage = Math.min((statValue / 255) * 100, 100);
         const color = STAT_COLORS[statName] || '#fff';
-        const label = STAT_NAMES_KO[statName] || statName;
+        const label = I18N[currentLang][statName] || (STAT_NAMES_KO[statName] ? STAT_NAMES_KO[statName][currentLang] : statName);
         return `
             <div class="stat-bar-row">
                 <div class="stat-bar-label">${label}</div>
@@ -437,27 +493,27 @@ function createCardElement(pokemon) {
         let colorCls = multiplier > 1 ? 'weakness' : (multiplier === 0 ? 'immune' : 'resistance');
         const typesStr = typesArr.map(typeId => {
             const typeInfo = TYPES.find(t => t.id === typeId);
-            return typeInfo ? `<span class="matchup-badge" style="background-color: ${typeInfo.color}">${typeInfo.name}</span>` : '';
+            return typeInfo ? `<span class="matchup-badge" style="background-color: ${typeInfo.color}">${typeInfo.names[currentLang]}</span>` : '';
         }).join('');
         
         return `
             <div class="matchup-row ${colorCls}">
-                <div class="matchup-label">${label} (x${multiplier})</div>
+                <div class="matchup-label">${label}</div>
                 <div class="matchup-types">${typesStr}</div>
             </div>
         `;
     };
 
-    matchupsHtml += renderMatchupGroup(4, '치명적', groups[4]);
-    matchupsHtml += renderMatchupGroup(2, '약점', groups[2]);
-    matchupsHtml += renderMatchupGroup(0.5, '반감', groups[0.5]);
-    matchupsHtml += renderMatchupGroup(0.25, '극반감', groups[0.25]);
-    matchupsHtml += renderMatchupGroup(0, '효과없음', groups[0]);
+    matchupsHtml += renderMatchupGroup(4, I18N[currentLang]['matchup_4x'], groups[4]);
+    matchupsHtml += renderMatchupGroup(2, I18N[currentLang]['matchup_2x'], groups[2]);
+    matchupsHtml += renderMatchupGroup(0.5, I18N[currentLang]['matchup_05x'], groups[0.5]);
+    matchupsHtml += renderMatchupGroup(0.25, I18N[currentLang]['matchup_025x'], groups[0.25]);
+    matchupsHtml += renderMatchupGroup(0, I18N[currentLang]['matchup_0x'], groups[0]);
 
     let badgesHtml = '';
-    if (pokemon.isShiny) badgesHtml += '<span class="special-badge shiny-badge">✨ 이로치</span>';
-    if (pokemon.isMythical) badgesHtml += '<span class="special-badge">환상</span>';
-    else if (pokemon.isLegendary) badgesHtml += '<span class="special-badge" style="background: linear-gradient(135deg, #a855f7, #7e22ce)">전설</span>';
+    if (pokemon.isShiny) badgesHtml += `<span class="special-badge shiny-badge">${I18N[currentLang]['badge_shiny']}</span>`;
+    if (pokemon.isMythical) badgesHtml += `<span class="special-badge">${I18N[currentLang]['badge_mythical']}</span>`;
+    else if (pokemon.isLegendary) badgesHtml += `<span class="special-badge" style="background: linear-gradient(135deg, #a855f7, #7e22ce)">${I18N[currentLang]['badge_legendary']}</span>`;
 
     container.innerHTML = `
         <div class="pokemon-card">
@@ -479,22 +535,22 @@ function createCardElement(pokemon) {
                     </div>
                     <div class="poke-stats">
                         <div class="stat-row">
-                            <span class="stat-name">키</span>
+                            <span class="stat-name">${I18N[currentLang]['stat_height']}</span>
                             <span class="stat-value">${(pokemon.height / 10).toFixed(1)}m</span>
                         </div>
                         <div class="stat-row">
-                            <span class="stat-name">몸무게</span>
+                            <span class="stat-name">${I18N[currentLang]['stat_weight']}</span>
                             <span class="stat-value">${(pokemon.weight / 10).toFixed(1)}kg</span>
                         </div>
                     </div>
                     <div class="poke-base-stats">
-                        <h4 class="base-stats-title">종족값</h4>
+                        <h4 class="base-stats-title">${I18N[currentLang]['base_stats_title']}</h4>
                         <div class="stat-bars">
                             ${statsHtml}
                         </div>
                     </div>
                     <div class="poke-matchups-container">
-                        <h4 class="base-stats-title">방어 상성</h4>
+                        <h4 class="base-stats-title">${I18N[currentLang]['matchups_title']}</h4>
                         <div class="matchups-list">
                             ${matchupsHtml}
                         </div>
@@ -601,6 +657,11 @@ async function redrawSingleCard(btn) {
                         (isMythical && !filterMythical) || 
                         (isNormal && !filterNormal)) return null; 
 
+                    // Nerf spawn probability for Legendary/Mythical by discarding them 90% of the time
+                    if ((isLegendary || isMythical) && Math.random() >= 0.1) {
+                        return null; 
+                    }
+
                     const pokeRes = await fetch(`${POKE_API_URL}/pokemon/${pokeId}`);
                     if (!pokeRes.ok) return null;
                     const pokeData = await pokeRes.json();
@@ -620,6 +681,10 @@ async function redrawSingleCard(btn) {
                     }
                     const isShiny = Math.random() < probability;
                     const matchups = await calculateTypeMatchups(pokeTypes);
+                    
+                    const homeImg = pokeData.sprites.other.home;
+                    const officialImg = pokeData.sprites.other['official-artwork'];
+                    const defaultImg = (isShiny ? (homeImg?.front_shiny || officialImg?.front_shiny) : (homeImg?.front_default || officialImg?.front_default)) || pokeData.sprites.front_default;
 
                     return {
                         id: pokeData.id,
@@ -629,7 +694,7 @@ async function redrawSingleCard(btn) {
                         weight: pokeData.weight,
                         stats: pokeData.stats,
                         matchups: matchups,
-                        image: (isShiny ? pokeData.sprites.other['official-artwork'].front_shiny : pokeData.sprites.other['official-artwork'].front_default) || pokeData.sprites.front_default,
+                        image: defaultImg,
                         species: speciesData,
                         isLegendary,
                         isMythical,
