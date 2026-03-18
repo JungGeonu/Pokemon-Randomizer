@@ -516,10 +516,19 @@ body {
 }
 
 /* Card Shine Beam (TCG Style) */
+.card-shine-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 5;
+}
+
 .card-shine-effect {
     position: absolute;
     top: 0; left: -100%; width: 200%; height: 100%;
-    border-radius: 24px;
     background: linear-gradient(
         115deg, 
         transparent 0%, 
@@ -533,13 +542,12 @@ body {
     opacity: 0;
     pointer-events: none;
     mix-blend-mode: overlay;
-    z-index: 5;
     transform: skewX(-20deg);
 }
 
 .pokemon-card.flipped .card-shine-effect {
     animation: shineSweep 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    animation-delay: 0.3s; /* Trigger after card starts flipping slightly */
+    animation-delay: 0.3s;
 }
 
 @keyframes shineSweep {

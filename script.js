@@ -770,7 +770,9 @@ function createCardElement(pokemon) {
                     <div class="reveal-flash"></div> <!-- Card flash -->
                 </div>
                 <div class="card-back" style="${bgStyle}">
-                    <div class="card-shine-effect"></div> <!-- Shine beam -->
+                    <div class="card-shine-container">
+                        <div class="card-shine-effect"></div> <!-- Shine beam inside clipped container -->
+                    </div>
                     <button class="btn-reroll" onclick="redrawSingleCard(this)" title="이 포켓몬만 다시 뽑기">🔄</button>
                     <div class="card-header">
                         <span class="poke-id">${formattedId}</span>
@@ -886,8 +888,6 @@ async function redrawSingleCard(btn) {
         return;
     }
 
-    playPokeballOpenSound();
-    
     setTimeout(async () => {
         let foundPokemon = null;
         idPool = idPool.sort(() => Math.random() - 0.5);
