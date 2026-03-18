@@ -228,60 +228,16 @@ function playPokeballSound() {
     } catch (e) { console.error(e); }
 }
 
+const pokeballOpenAudio = new Audio('https://www.myinstants.com/media/sounds/sound-effects-pokemon-anime-7-pokemon-out.mp3');
+pokeballOpenAudio.volume = 0.6;
+
 function playPokeballOpenSound() {
     try {
-        if (!audioCtx) {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) return;
-            audioCtx = new AudioContext();
-        }
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        
-        // 1. Button click / Mechanism snap
-        const clickOsc = audioCtx.createOscillator();
-        const clickGain = audioCtx.createGain();
-        clickOsc.type = 'square';
-        clickOsc.frequency.setValueAtTime(200, audioCtx.currentTime);
-        clickOsc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.05);
-        clickGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        clickGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
-        clickOsc.connect(clickGain);
-        clickGain.connect(audioCtx.destination);
-        clickOsc.start(audioCtx.currentTime);
-        clickOsc.stop(audioCtx.currentTime + 0.05);
-
-        // 2. White noise Pshh (Pressurized air release)
-        const bufferSize = audioCtx.sampleRate * 0.3;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-        const noise = audioCtx.createBufferSource();
-        noise.buffer = buffer;
-        const noiseFilter = audioCtx.createBiquadFilter();
-        noiseFilter.type = 'bandpass';
-        noiseFilter.frequency.value = 4000;
-        const noiseGain = audioCtx.createGain();
-        noiseGain.gain.setValueAtTime(0.5, audioCtx.currentTime + 0.05);
-        noiseGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-        noise.connect(noiseFilter);
-        noiseFilter.connect(noiseGain);
-        noiseGain.connect(audioCtx.destination);
-        noise.start(audioCtx.currentTime + 0.05);
-
-        // 3. Electronic Ping
-        const pingOsc = audioCtx.createOscillator();
-        const pingGain = audioCtx.createGain();
-        pingOsc.type = 'sine';
-        pingOsc.frequency.setValueAtTime(800, audioCtx.currentTime + 0.05);
-        pingOsc.frequency.exponentialRampToValueAtTime(1500, audioCtx.currentTime + 0.2);
-        pingGain.gain.setValueAtTime(0.4, audioCtx.currentTime + 0.05);
-        pingGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-        pingOsc.connect(pingGain);
-        pingGain.connect(audioCtx.destination);
-        pingOsc.start(audioCtx.currentTime + 0.05);
-        pingOsc.stop(audioCtx.currentTime + 0.2);
-
-    } catch (e) { console.error(e); }
+        pokeballOpenAudio.currentTime = 0;
+        pokeballOpenAudio.play().catch(e => console.error("Pokeball open audio play failed:", e));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 // Initialize App
