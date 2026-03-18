@@ -188,41 +188,21 @@ function playPokeballSound() {
         }
         if (audioCtx.state === 'suspended') audioCtx.resume();
         
+        // 부드러운 카드 넘기는 소리: 짧고 조용한 플럭(pluck) 사운드
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(320, audioCtx.currentTime + 0.06);
         
-        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
         
         osc.start(audioCtx.currentTime);
-        osc.stop(audioCtx.currentTime + 0.1);
-        
-        const bufferSize = audioCtx.sampleRate * 0.2;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-        
-        const noise = audioCtx.createBufferSource();
-        noise.buffer = buffer;
-        const noiseFilter = audioCtx.createBiquadFilter();
-        noiseFilter.type = 'highpass';
-        noiseFilter.frequency.value = 1000;
-        const noiseGain = audioCtx.createGain();
-        
-        noise.connect(noiseFilter);
-        noiseFilter.connect(noiseGain);
-        noiseGain.connect(audioCtx.destination);
-        
-        noiseGain.gain.setValueAtTime(0.3, audioCtx.currentTime + 0.05);
-        noiseGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-        
-        noise.start(audioCtx.currentTime + 0.05);
+        osc.stop(audioCtx.currentTime + 0.12);
     } catch (e) { console.error(e); }
 }
 
@@ -909,7 +889,8 @@ async function redrawSingleCard(btn) {
                         species: speciesData,
                         isLegendary,
                         isMythical,
-                        isShiny
+                        isShiny,
+                        cry: pokeData.cries ? pokeData.cries.latest : null
                     };
                 } catch (err) {
                     return null;
@@ -933,13 +914,9 @@ async function redrawSingleCard(btn) {
                     if (newInner) {
                         newInner.classList.add('flipped');
                         playPokeballSound();
-                        if (foundPokemon.isShiny) {
-                            shinyAudio.currentTime = 0;
-                            shinyAudio.play().catch(e => console.error("Audio play failed:", e));
-                        }
                         if (foundPokemon.cry) {
                             const cryAudio = new Audio(foundPokemon.cry);
-                            cryAudio.volume = 0.05; // Reduced volume
+                            cryAudio.volume = 0.05;
                             cryAudio.play().catch(() => {});
                         }
                     }
