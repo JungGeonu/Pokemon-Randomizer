@@ -571,6 +571,16 @@ body {
 }
 
 /* Hologram Effect for Shiny Cards */
+.shiny-card {
+    z-index: 10; /* Ensure shiny cards sit above other cards */
+}
+
+.shiny-card .card-front,
+.shiny-card .card-back {
+    box-shadow: 0 0 25px rgba(252, 211, 77, 0.4), 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(252, 211, 77, 0.8);
+}
+
 .shiny-card .card-back::after {
     content: '';
     position: absolute;
@@ -586,15 +596,10 @@ body {
     );
     background-size: 300% 300%;
     mix-blend-mode: color-dodge;
-    z-index: 4;
+    z-index: 1; /* Lower than content but above background */
     opacity: 0.7;
     pointer-events: none;
     animation: holoShimmer 4s ease infinite;
-}
-
-/* Shiny Border Glow */
-.shiny-card {
-    filter: drop-shadow(0 0 15px rgba(252, 211, 77, 0.3));
 }
 
 @keyframes holoShimmer {
@@ -655,6 +660,7 @@ body {
     flex-direction: column;
     position: relative;
     overflow: visible;
+    z-index: 5; /* Higher than card-front (z:2) */
 }
 
 /* Card content styling */
@@ -673,7 +679,7 @@ body {
 
 .card-header {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -745,7 +751,7 @@ body {
 
 .poke-image-container {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     flex: 1;
     display: flex;
     align-items: center;

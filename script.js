@@ -572,9 +572,17 @@ async function startDraw() {
                     const isShiny = Math.random() < probability;
                     const matchups = await calculateTypeMatchups(pokeTypes);
                     
-                    const homeImg = pokeData.sprites.other.home;
-                    const officialImg = pokeData.sprites.other['official-artwork'];
-                    const defaultImg = (isShiny ? (homeImg?.front_shiny || officialImg?.front_shiny) : (homeImg?.front_default || officialImg?.front_default)) || pokeData.sprites.front_default;
+                    const homeImg = pokeData.sprites.other?.home;
+                    const officialImg = pokeData.sprites.other?.['official-artwork'];
+                    
+                    let targetImg = null;
+                    if (isShiny) {
+                        targetImg = homeImg?.front_shiny || officialImg?.front_shiny || pokeData.sprites.front_shiny;
+                    } else {
+                        targetImg = homeImg?.front_default || officialImg?.front_default || pokeData.sprites.front_default;
+                    }
+                    
+                    const defaultImg = targetImg || pokeData.sprites.front_default;
 
                     return {
                         id: pokeData.id,
@@ -789,8 +797,8 @@ async function redrawSingleCard(btn) {
     const containerEl = btn.closest('.pokemon-card-container');
     if (!containerEl) return;
     
-    const cardInner = containerEl.querySelector('.card-inner');
-    if (cardInner) cardInner.classList.remove('flipped');
+    const card = containerEl.querySelector('.pokemon-card');
+    if (card) card.classList.remove('flipped');
     
     const loadingOverlay = document.createElement('div');
     loadingOverlay.className = 'card-loading-overlay';
@@ -895,9 +903,17 @@ async function redrawSingleCard(btn) {
                     const isShiny = Math.random() < probability;
                     const matchups = await calculateTypeMatchups(pokeTypes);
                     
-                    const homeImg = pokeData.sprites.other.home;
-                    const officialImg = pokeData.sprites.other['official-artwork'];
-                    const defaultImg = (isShiny ? (homeImg?.front_shiny || officialImg?.front_shiny) : (homeImg?.front_default || officialImg?.front_default)) || pokeData.sprites.front_default;
+                    const homeImg = pokeData.sprites.other?.home;
+                    const officialImg = pokeData.sprites.other?.['official-artwork'];
+                    
+                    let targetImg = null;
+                    if (isShiny) {
+                        targetImg = homeImg?.front_shiny || officialImg?.front_shiny || pokeData.sprites.front_shiny;
+                    } else {
+                        targetImg = homeImg?.front_default || officialImg?.front_default || pokeData.sprites.front_default;
+                    }
+                    
+                    const defaultImg = targetImg || pokeData.sprites.front_default;
 
                     return {
                         id: pokeData.id,
